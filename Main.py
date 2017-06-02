@@ -11,6 +11,8 @@ Veja abaixo a lista de comandos que pode usar para interagir comigo:
 /IMMDT -  Para obter visualizar as orientações dadas pelo professor Flávio;
 
 Por enquanto é só, mas em breve suportarei mais comandos para te ajudar. :)"""
+
+immdtImagePath=r"images\IMMDT\orientacoes.png"
 		  
 unknownTxt = "Desculpe, porém eu não conheço esse comando.\nDigite /help ou /h para conhecer os comandos que pode utilizar comigo."
 
@@ -26,7 +28,7 @@ def h(bot, update):
         helpTxt.format(update.message.from_user.first_name))
 
 def IMMDT(bot, update):	
-	bot.send_photo(chat_id=update.message.chat_id, photo=open(r'images\IMMDT\orientacoes.png', 'rb'))
+	bot.send_photo(chat_id=update.message.chat_id, photo=open(immdtImagePath, 'rb'))
 	bot.send_message(chat_id=update.message.chat_id, text="Para cadastro no POSGERE o link é:\nhttp://seer.spo.ifsp.edu.br/index.php/posgere/user/register")
 
 def unknown(bot, update):
