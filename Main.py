@@ -12,7 +12,7 @@ Veja abaixo a lista de comandos que pode usar para interagir comigo:
 
 Por enquanto é só, mas em breve suportarei mais comandos para te ajudar. :)"""
 
-immdtImagePath=r"images\IMMDT\orientacoes.png"
+immdtImagePath="images/IMMDT/orientacoes.png"
 		  
 unknownTxt = "Desculpe, porém eu não conheço esse comando.\nDigite /help ou /h para conhecer os comandos que pode utilizar comigo."
 
