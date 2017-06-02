@@ -1,32 +1,44 @@
+# -*- coding: utf-8 -*-
+
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
-from telegram.ext import Updater
-from telegram.ext import MessageHandler, Filters
-from telegram import InlineQueryResultArticle, InputTextMessageContent
-from telegram.ext import InlineQueryHandler
-from telegram.ext import CommandHandler
-
-updater = Updater(token='397179894:AAE0Cq2sRmZH7YVz7p-OdqXPS-4wHj5vq4M')
-
-dispatcher = updater.dispatcher
-
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
+helpTxt = """Olá, {},
+
+Veja abaixo a lista de comandos que pode usar para interagir comigo:
+/IMMDT -  Para obter visualizar as orientações dadas pelo professor Flávio;
+
+Por enquanto é só, mas em breve suportarei mais comandos para te ajudar. :)"""
+		  
+unknownTxt = "Desculpe, porém eu não conheço esse comando.\nDigite /help ou /h para conhecer os comandos que pode utilizar comigo."
+
 def start(bot, update):
-	bot.send_message(chat_id=update.message.chat_id, text="I'm a bot, please talk to me!")
+    update.message.reply_text('Olá, sou o MestreIFSP e vou tentar te ajudar com questões do Mestrado no IFSP-SP.\n\nDigite /help ou /h para conhecer os comandos em que eu posso te ajudar.')
+	
+def help(bot, update):
+    update.message.reply_text(
+        helpTxt.format(update.message.from_user.first_name))
+		
+def h(bot, update):
+    update.message.reply_text(
+        helpTxt.format(update.message.from_user.first_name))
 
-start_handler = CommandHandler('start', start)
-dispatcher.add_handler(start_handler)
-
+def IMMDT(bot, update):	
+	bot.send_photo(chat_id=update.message.chat_id, photo=open('images\IMMDT\orientacoes.png', 'rb'))
+	bot.send_message(chat_id=update.message.chat_id, text="Para cadastro no POSGERE o link é:\nhttp://seer.spo.ifsp.edu.br/index.php/posgere/user/register")
 
 def unknown(bot, update):
-	bot.send_message(chat_id=update.message.chat_id, text="Sorry, I didn't understand that command.")
+	bot.send_message(chat_id=update.message.chat_id, text=unknownTxt)
 
-unknown_handler = MessageHandler(Filters.command, unknown)
-dispatcher.add_handler(unknown_handler)
+updater = Updater('397179894:AAE0Cq2sRmZH7YVz7p-OdqXPS-4wHj5vq4M')
 
-
-
+updater.dispatcher.add_handler(CommandHandler('start', start))
+updater.dispatcher.add_handler(CommandHandler('help', help))
+updater.dispatcher.add_handler(CommandHandler('h', h))
+updater.dispatcher.add_handler(CommandHandler('IMMDT', IMMDT))
+updater.dispatcher.add_handler(MessageHandler(Filters.command, unknown))
 
 updater.start_polling()
 updater.idle()
