@@ -26,7 +26,7 @@ def h(bot, update):
         helpTxt.format(update.message.from_user.first_name))
 
 def IMMDT(bot, update):	
-	bot.send_photo(chat_id=update.message.chat_id, photo=open('images\IMMDT\orientacoes.png', 'rb'))
+	bot.send_photo(chat_id=update.message.chat_id, photo=open(r'images\IMMDT\orientacoes.png', 'rb'))
 	bot.send_message(chat_id=update.message.chat_id, text="Para cadastro no POSGERE o link é:\nhttp://seer.spo.ifsp.edu.br/index.php/posgere/user/register")
 
 def unknown(bot, update):
