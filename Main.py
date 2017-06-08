@@ -18,7 +18,9 @@ Por enquanto é só, mas em breve suportarei mais comandos para te ajudar. :)"""
 
 immdtImagePath="images/IMMDT/orientacoes.png"
 
-shutdownTxt="Estou indo dormir... Ate logo!"
+shutdownTxt="Estou indo dormir... Até logo!"
+
+contribTxt="Contribua para meu aprimoramento em https://github.com/TiagoPrata/MestreIFSP"
 
 unknownTxt = "Desculpe, porém eu não conheço esse comando.\nDigite /help ou /h para conhecer os comandos que pode utilizar comigo."
 
@@ -162,6 +164,9 @@ def shutdown(bot, update, args):
 def lerolero(bot, update):
     update.message.reply_text(sayit())
 
+def contrib(bot, update):
+    update.message.reply_text(contribTxt)
+
 def help(bot, update):
     update.message.reply_text(
         helpTxt.format(update.message.from_user.first_name))
@@ -182,6 +187,7 @@ updater = Updater('397179894:AAE0Cq2sRmZH7YVz7p-OdqXPS-4wHj5vq4M')
 updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(CommandHandler('shutdown', shutdown, pass_args=True))
 updater.dispatcher.add_handler(CommandHandler('lerolero', lerolero))
+updater.dispatcher.add_handler(CommandHandler('contrib', contrib))
 updater.dispatcher.add_handler(CommandHandler('help', help))
 updater.dispatcher.add_handler(CommandHandler('h', h))
 updater.dispatcher.add_handler(CommandHandler('IMMDT', IMMDT))
