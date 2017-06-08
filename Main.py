@@ -3,8 +3,11 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
 import random
+import sys
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+
+shutdownPassword="abc1234"
 
 helpTxt = """Olá, {},
 
@@ -14,6 +17,8 @@ Veja abaixo a lista de comandos que pode usar para interagir comigo:
 Por enquanto é só, mas em breve suportarei mais comandos para te ajudar. :)"""
 
 immdtImagePath="images/IMMDT/orientacoes.png"
+
+shutdownTxt="Estou indo dormir... Ate logo!"
 
 unknownTxt = "Desculpe, porém eu não conheço esse comando.\nDigite /help ou /h para conhecer os comandos que pode utilizar comigo."
 
@@ -148,6 +153,12 @@ def sayit():
 def start(bot, update):
     update.message.reply_text('Olá, sou o MestreIFSP e vou tentar te ajudar com questões do Mestrado no IFSP-SP.\n\nDigite /help ou /h para conhecer os comandos em que eu posso te ajudar.')
 
+def shutdown(bot, update, args):
+    if len(args) > 0:
+        if args[0]==shutdownPassword:
+            bot.send_message(chat_id=update.message.chat_id, text=shutdownTxt)
+            sys.exit()
+
 def lerolero(bot, update):
     update.message.reply_text(sayit())
 
@@ -169,6 +180,7 @@ def unknown(bot, update):
 updater = Updater('397179894:AAE0Cq2sRmZH7YVz7p-OdqXPS-4wHj5vq4M')
 
 updater.dispatcher.add_handler(CommandHandler('start', start))
+updater.dispatcher.add_handler(CommandHandler('shutdown', shutdown, pass_args=True))
 updater.dispatcher.add_handler(CommandHandler('lerolero', lerolero))
 updater.dispatcher.add_handler(CommandHandler('help', help))
 updater.dispatcher.add_handler(CommandHandler('h', h))
