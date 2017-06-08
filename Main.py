@@ -159,14 +159,11 @@ t3 = [  'das condições financeiras e administrativas exigidas.',
 def sayit():
 	return random.choice(t0)+random.choice(t1)+random.choice(t2)+random.choice(t3)
 
-def start(bot, update):
-    update.message.reply_text('Olá, sou o MestreIFSP e vou tentar te ajudar com questões do Mestrado no IFSP-SP.\n\nDigite /help ou /h para conhecer os comandos em que eu posso te ajudar.')
-
 def shutdown(bot, update, args):
     if len(args) > 0:
         if args[0]==shutdownPassword:
             bot.send_message(chat_id=update.message.chat_id, text=shutdownTxt)
-            sys.exit()
+            updater.stop()
 
 def lerolero(bot, update):
     update.message.reply_text(sayit())
@@ -191,7 +188,6 @@ def unknown(bot, update):
 
 updater = Updater('397179894:AAE0Cq2sRmZH7YVz7p-OdqXPS-4wHj5vq4M')
 
-updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(CommandHandler('shutdown', shutdown, pass_args=True))
 updater.dispatcher.add_handler(CommandHandler('lerolero', lerolero))
 updater.dispatcher.add_handler(CommandHandler('contrib', contrib))
