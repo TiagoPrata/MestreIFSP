@@ -12,7 +12,14 @@ shutdownPassword="abc1234"
 helpTxt = """Olá, {},
 
 Veja abaixo a lista de comandos que pode usar para interagir comigo:
+
+/lerolero - Te direi uma frase de efeito;
+/contrib - Relembre a url para ajudar a me aprimorar;
+
 /IMMDT -  Para obter visualizar as orientações dadas pelo professor Flávio;
+
+/shutdown - Me coloque pra dormir (exige senha)
+
 
 Por enquanto é só, mas em breve suportarei mais comandos para te ajudar. :)"""
 
